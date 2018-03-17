@@ -36,3 +36,46 @@ export const editExpense = (id, updates) => ({
   id,
   updates,
 })
+
+//SET_EXPENSES
+export const setExpenses = (expenses) => ({
+  type: 'SET_EXPENSES',
+  expenses,
+})
+
+
+ export const startSetExpenses = () => {
+   return (dispatch) => {
+    return database.ref('expenses')
+      .once('value')
+      .then((snapshot) => {
+        const expenses = []
+        snapshot.forEach((childSnapshot) => {
+          expenses.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val()
+          })
+        })
+        dispatch(setExpenses(expenses))
+      })
+    }
+ }
+
+// 1. fetch all expens data once from firebas
+// 2. parse data from array
+// 3. Dispatch set_expenses
+
+
+// database.ref('expenses')
+//   .once('value')
+//   .then((snapshot) => {
+//     const expenses = []
+
+//     snapshot.forEach((childSnapshot) => {
+//       expenses.push({ 
+//         id: childSnapshot.key,
+//         ...childSnapshot.val()
+//       })
+//     })
+//     console.log(expenses)
+//   })
