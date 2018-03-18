@@ -11,9 +11,10 @@ const config = {
 
 firebase.initializeApp(config);
 
- const database = firebase.database()
+const database = firebase.database()
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
 
- export {firebase, database as default }
+ export {firebase, googleAuthProvider, database as default }
 
 // //child removed_event
 // database.ref('expenses').on('child_removed', (snapshot) => {
@@ -60,13 +61,13 @@ firebase.initializeApp(config);
 // })
 
 
-const expenseRef = database.ref('expenses')
-expenseRef.push({
-  description: 'Plane ticket',
-  note: 'Yeaa',
-  amount: 150000,
-  createdAt: 1000
-})
+// const expenseRef = database.ref('expenses')
+// expenseRef.push({
+//   description: 'Plane ticket',
+//   note: 'Yeaa',
+//   amount: 150000,
+//   createdAt: 1000
+// })
 
 
 
